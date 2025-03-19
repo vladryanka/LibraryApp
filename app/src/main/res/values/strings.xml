@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">LibraryApp</string>
+    <string name="success_delete_toast">Книга успешно удалена из избранного</string>
+    <string name="success_add_toast">Книга успешно добавлена в избранное</string>
+    <string name="error_delete_toast">Ошибка удаления избранной книги</string>
+    <string name="error_add_toast">Ошибка добавления в избранное</string>
+    <string name="error_not_found">По вашему запросу ничего не найдено</string>
+    <string name="error_query">Ошибка выполнения запроса</string>
+    <string name="retry">Попробовать еще раз</string>
+    <string name="sort_by_date">По дате</string>
+    <string name="sort_by_best_match">Лучшее совпадение</string>
+    <string name="apply">Применить</string>
+    <string name="filters">Фильтры</string>
+    <string name="authors">Авторы</string>
+    <string name="sort">Сортировать</string>
+    <string name="enter_books_name">Введите название книги,\n которую ищете</string>
+    <string name="search">Поиск</string>
+    <string name="description">Описание</string>
+
+
 </resources>
