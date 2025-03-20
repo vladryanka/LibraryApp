@@ -40,18 +40,14 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             val result = getBooksByTitle(title)
             if (result.second != null) {
                 _bookList.value = result.second
-
             }
             _errorMessage.value = result.first
             _isLoading.value = false
         }
     }
 
-    fun selectBook(id: Int) {
-        viewModelScope.launch {
-            val result = repository.getBookById(id)
-            _selectedBook.value = result
-        }
+    suspend fun selectBook(title: String): Int {
+        return repository.getBookByTitle(title)
     }
 
 }

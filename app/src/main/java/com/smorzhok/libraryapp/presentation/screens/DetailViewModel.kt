@@ -16,7 +16,7 @@ class DetailViewModel: ViewModel() {
     val book: LiveData<BookDbModel> get() = _book
     fun getBookById(id:Int) {
         viewModelScope.launch {
-            _book.value = repository.getBookById(id)
+            _book.postValue( repository.getBookById(id) )
 
             Log.d("Book", _book.value.toString())
         }

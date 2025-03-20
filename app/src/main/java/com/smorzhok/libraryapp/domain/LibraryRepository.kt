@@ -18,4 +18,6 @@ interface LibraryRepository{
     suspend fun getBooksByTitle(title:String): Pair<String?,List<BookDbModel>?>
 
     suspend fun getBookById(id:Int): BookDbModel
+
+    suspend fun getBookByTitle(title:String): Int
 }

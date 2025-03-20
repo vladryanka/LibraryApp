@@ -50,9 +50,17 @@ class LibraryRepositoryImpl(private val bookDbModelDao: BookDbModelDao) : Librar
 
     override suspend fun getBookById(id:Int): BookDbModel{
         return withContext(Dispatchers.IO) {
-            bookDbModelDao.getBookById(id)
+            val book = bookDbModelDao.getBookById(id)
+            Log.d("Book", "In repo ${book} + $id")
+            book
         }
     }
+    override suspend fun getBookByTitle(title:String): Int{
+        return withContext(Dispatchers.IO) {
+            bookDbModelDao.getIdByTitle(title)
+        }
+    }
+
     suspend fun isBookExists(id: Int): Boolean {
         return bookDbModelDao.isBookExists(id)
     }

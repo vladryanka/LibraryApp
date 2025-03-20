@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -30,9 +31,9 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.smorzhok.libraryapp.R
@@ -70,17 +71,22 @@ fun BookListScreen(
 
 @Composable
 fun BookCard(book: BookDbModel, navController: NavController, mainViewModel: MainViewModel) {
-
     val paint = if (book.imageLinks?.thumbnail == null)
         painterResource(R.drawable.book_placeholder) else
         rememberAsyncImagePainter(book.imageLinks.thumbnail)
+     val ldId = MutableLiveData<Int>()
+
+    LaunchedEffect(book.title) {
+        val getId = mainViewModel.selectBook(book.title)
+        ldId.value = getId
+    }
+
     Box(
         modifier = Modifier
             .padding(8.dp)
             .fillMaxWidth()
             .clickable {
-                mainViewModel.selectBook(book.id)
-                navController.navigate("book_detail/${book.id}")
+                    navController.navigate("book_detail/${ldId.value}")
             }
     ) {
         Column(horizontalAlignment = Alignment.Start) {
@@ -96,6 +102,7 @@ fun BookCard(book: BookDbModel, navController: NavController, mainViewModel: Mai
                         .aspectRatio(3f / 4f)
                         .clip(RoundedCornerShape(32.dp))
                 )
+
 
                 Box(
                     modifier = Modifier
@@ -132,20 +139,4 @@ fun BookCard(book: BookDbModel, navController: NavController, mainViewModel: Mai
             )
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun BookCardPreview() {
-    /*BookListScreen(
-        listOf(
-            Book("Книга", listOf("автор"), "dfd", null, "2000"),
-            Book("Книга", listOf("автор"), "dfd", null, "2000"),
-            Book("Книга", listOf("автор"), "dfd", null, "2000"),
-            Book("Книга", listOf("автор"), "dfd", null, "2000"),
-            Book("Книга", listOf("автор"), "dfd", null, "2000"),
-            Book("Книга", listOf("автор"), "dfd", null, "2000"),
-            Book("Книга", listOf("автор"), "dfd", null, "2000")
-        )
-    )*/
 }

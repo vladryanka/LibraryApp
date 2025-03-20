@@ -15,7 +15,10 @@ interface BookDbModelDao {
     suspend fun isBookExists(id: Int): Boolean
 
     @Query("SELECT * FROM books WHERE id = :id")
-    fun getBookById(id:Int): BookDbModel
+    fun getBookById(id: Int): BookDbModel
+
+    @Query("SELECT * FROM books WHERE title = :title")
+    fun getIdByTitle(title: String):Int
 
     @Insert
     fun addBooks(book: BookDbModel)
