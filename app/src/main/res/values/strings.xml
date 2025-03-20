@@ -5,7 +5,7 @@
     <string name="error_delete_toast">Ошибка удаления избранной книги</string>
     <string name="error_add_toast">Ошибка добавления в избранное</string>
     <string name="error_not_found">По вашему запросу ничего не найдено</string>
-    <string name="error_query">Ошибка выполнения запроса</string>
+    <string name="error_query">Ошибка выполнения запроса,\nпопробуйте повторить</string>
     <string name="retry">Попробовать еще раз</string>
     <string name="sort_by_date">По дате</string>
     <string name="sort_by_best_match">Лучшее совпадение</string>

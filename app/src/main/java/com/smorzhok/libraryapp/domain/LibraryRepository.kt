@@ -1,5 +1,7 @@
 package com.smorzhok.libraryapp.domain
 
+import com.smorzhok.libraryapp.data.entities.BookDbModel
+
 interface LibraryRepository{
     suspend fun addBookToFavorites(book: Book)
     suspend fun deleteBookFromFavorites(book: Book)
@@ -13,5 +15,7 @@ interface LibraryRepository{
 
     suspend fun getBookDetails(bookId: String): BookDetails
 
+    suspend fun getBooksByTitle(title:String): Pair<String?,List<BookDbModel>?>
 
+    suspend fun getBookById(id:Int): BookDbModel
 }

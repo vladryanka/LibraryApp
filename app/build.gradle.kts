@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
+    alias(libs.plugins.kotlinKapt)
+    //alias(libs.plugins.hiltAndroid)
     alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
@@ -83,5 +85,12 @@ dependencies {
     implementation(libs.androidx.media3.decoder)
     implementation(libs.androidx.runtime.livedata)
     ksp(libs.androidx.room.compiler)
+
+    implementation(libs.dagger2)
+    ksp(libs.dagger2.compiler)
+    ksp(libs.dagger2.android.processor)
+    //implementation(libs.hilt)
+   // implementation(libs.hiltNavigationCompose)
+   // kapt(libs.hiltCompiler)
 
 }

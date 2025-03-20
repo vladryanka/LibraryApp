@@ -1,4 +1,4 @@
-package com.smorzhok.libraryapp.presentation.screens
+package com.smorzhok.libraryapp.presentation.navigation
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -6,8 +6,11 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.smorzhok.libraryapp.presentation.screens.MyScreen
 
 @Composable
 fun BottomNavigationBar(navController: NavController) {
@@ -19,7 +22,7 @@ fun BottomNavigationBar(navController: NavController) {
     NavigationBar {
         items.forEach { screen ->
             NavigationBarItem(
-                icon = { Icon(screen.icon, contentDescription = screen.title) },
+                icon = { Icon(ImageVector.vectorResource(screen.icon), contentDescription = screen.title) },
                 label = { Text(screen.title) },
                 selected = currentRoute == screen.route,
                 onClick = {
