@@ -38,8 +38,8 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val _resAdd = MutableLiveData(false)
     val resAdd: LiveData<Boolean> get() = _resAdd
 
-    private val _selectedBook = MutableLiveData<Int?>()
-    val selectedBook: LiveData<Int?> get() = _selectedBook
+    private val _selectedBook = MutableLiveData<String?>()
+    val selectedBook: LiveData<String?> get() = _selectedBook
 
     private val _resDelete = MutableLiveData(false)
     val resDelete: LiveData<Boolean> get() = _resDelete
@@ -69,7 +69,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
     fun selectBook(title: String) {
         viewModelScope.launch {
-            val result = repository.getBookByTitle(title)
+            val result = repository.getVolumeIdByTitle(title)
             _selectedBook.postValue(result)
         }
     }

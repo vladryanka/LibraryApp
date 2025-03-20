@@ -20,7 +20,7 @@ interface BookDbModelDao {
     fun getBookById(id: Int): BookDbModel
 
     @Query("SELECT * FROM books WHERE title = :title")
-    fun getIdByTitle(title: String):Int
+    fun getVolumeIdByTitle(title: String): BookDbModel
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addBooks(book: BookDbModel)

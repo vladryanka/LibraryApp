@@ -9,7 +9,6 @@ import com.smorzhok.libraryapp.data.remote.NetworkResult
 import com.smorzhok.libraryapp.data.remote.handleApi
 import com.smorzhok.libraryapp.domain.Book
 import com.smorzhok.libraryapp.domain.LibraryRepository
-import com.smorzhok.libraryapp.domain.SortType
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -33,11 +32,10 @@ class LibraryRepositoryImpl(private val bookDbModelDao: BookDbModelDao) : Librar
         TODO("Not yet implemented")
     }
 
-    override suspend fun getBookById(id: Int): BookDbModel {
+    override suspend fun getBookById(id: String): BookDbModel {
         return withContext(Dispatchers.IO) {
-            val book = bookDbModelDao.getBookById(id)
-            Log.d("Book", "In repo ${book} + $id")
-            book
+            val result = mapper.mapDtoToDbModel(LibraryApi.retrofitService.loadDetailInfo(id).body()!!)
+            result
         }
     }
 
@@ -45,9 +43,9 @@ class LibraryRepositoryImpl(private val bookDbModelDao: BookDbModelDao) : Librar
         return bookDbModelDao.containsBookById(id)
     }
 
-    override suspend fun getBookByTitle(title: String): Int {
+    override suspend fun getVolumeIdByTitle(title: String): String {
         return withContext(Dispatchers.IO) {
-            bookDbModelDao.getIdByTitle(title)
+           ""
         }
     }
 

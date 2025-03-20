@@ -14,10 +14,10 @@ class DetailViewModel: ViewModel() {
 
     private val _book = MutableLiveData<BookDbModel>()
     val book: LiveData<BookDbModel> get() = _book
-    fun getBookById(id:Int) {
+    fun getBookById(id:String) {
         viewModelScope.launch {
             _book.postValue( repository.getBookById(id) )
-
+            repository.getBookById(id)
             Log.d("Book", _book.value.toString())
         }
     }

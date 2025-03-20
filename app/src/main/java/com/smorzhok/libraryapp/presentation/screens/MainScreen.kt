@@ -33,7 +33,7 @@ fun MainScreen() {
             composable("book_detail/{bookId}") { backStackEntry ->
                 val bookIdString = backStackEntry.arguments?.getString("bookId") ?: return@composable
                 val bookId = bookIdString.toIntOrNull() ?: return@composable
-                BookDetailScreen(bookId, navController)
+                BookDetailScreen(bookId.toString(), navController)
             }
         }
     }

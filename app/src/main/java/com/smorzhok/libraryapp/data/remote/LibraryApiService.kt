@@ -4,7 +4,9 @@ import android.content.Context
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.smorzhok.libraryapp.data.LibraryRepositoryImpl
 import com.smorzhok.libraryapp.data.database.AppDatabase
+import com.smorzhok.libraryapp.data.entities.BookDto
 import com.smorzhok.libraryapp.data.entities.BooksResponse
+import com.smorzhok.libraryapp.data.entities.VolumeInfo
 import com.smorzhok.libraryapp.domain.LibraryRepository
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
@@ -13,6 +15,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
@@ -42,6 +45,9 @@ private val retrofit: Retrofit = Retrofit.Builder()
 interface LibraryApiService {
     @GET("/books/v1/volumes")
     suspend fun loadBookByTitle(@Query("q") query: String): Response<BooksResponse>
+
+    @GET("v1/volumes/{volumeId}")
+    suspend fun loadDetailInfo(@Path("volumeId") volumeId: String): Response<BookDto>
 }
 
 object LibraryApi {

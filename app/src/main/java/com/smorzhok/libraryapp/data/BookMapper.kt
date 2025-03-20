@@ -14,7 +14,8 @@ class BookMapper {
                 ?: "",
             imageLinks = model.volumeInfo.imageLinks,
             publishedDate = model.volumeInfo.publishedDate
-                ?: ""
+                ?: "",
+            volumeId = model.volumeId
         )
     }
 }

@@ -6,5 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class BookDto(
     @SerialName("volumeInfo")
-    val volumeInfo: VolumeInfo
+    val volumeInfo: VolumeInfo,
+    @SerialName("id")
+    val volumeId: String
 )

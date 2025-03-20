@@ -45,7 +45,7 @@ import com.smorzhok.libraryapp.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BookDetailScreen(
-    bookId: Int,
+    bookId: String,
     navController: NavController,
     detailViewModel: DetailViewModel = viewModel()
 ) {

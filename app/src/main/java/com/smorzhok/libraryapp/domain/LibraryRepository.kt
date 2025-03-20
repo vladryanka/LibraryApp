@@ -10,9 +10,9 @@ interface LibraryRepository{
 
     suspend fun getBooksByTitle(title:String): Pair<String?,List<BookDbModel>?>
 
-    suspend fun getBookById(id:Int): BookDbModel
+    suspend fun getBookById(id:String): BookDbModel
 
     suspend fun isBookExists(title: String): Boolean
 
-    suspend fun getBookByTitle(title:String): Int
+    suspend fun getVolumeIdByTitle(title:String): String
 }

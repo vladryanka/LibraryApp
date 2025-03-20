@@ -13,5 +13,6 @@ data class BookDbModel(
     val authors: List<String>,
     val description: String,
     val imageLinks: ImageLinks?,
-    val publishedDate: String
+    val publishedDate: String,
+    val volumeId: String
 )

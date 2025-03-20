@@ -74,12 +74,12 @@ fun BookCard(book: BookDbModel, navController: NavController, mainViewModel: Mai
     val paint = if (book.imageLinks?.thumbnail == null)
         painterResource(R.drawable.book_placeholder) else
         rememberAsyncImagePainter(book.imageLinks.thumbnail)
-    val ldId = MutableLiveData<Int>()
+    val ldId = MutableLiveData<String>()
 
     val isLiked = remember { mutableStateOf(false) }
 
     LaunchedEffect(book.title) {
-        val getId = mainViewModel.selectBook(book.title)
+        mainViewModel.selectBook(book.title)
         ldId.value = mainViewModel.selectedBook.value
         val bookLiked = mainViewModel.isBookLiked(book.title)
         isLiked.value = bookLiked
