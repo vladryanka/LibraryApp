@@ -1,4 +1,4 @@
-package com.smorzhok.libraryapp.data.database
+package com.smorzhok.libraryapp.data.database.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao

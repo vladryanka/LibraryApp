@@ -1,4 +1,4 @@
-package com.smorzhok.libraryapp.data.database
+package com.smorzhok.libraryapp.data.database.contverter
 
 import androidx.room.TypeConverter
 import com.smorzhok.libraryapp.data.entities.ImageLinks

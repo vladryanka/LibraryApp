@@ -1,7 +1,7 @@
 package com.smorzhok.libraryapp.data
 
 import android.util.Log
-import com.smorzhok.libraryapp.data.database.BookDbModelDao
+import com.smorzhok.libraryapp.data.database.dao.BookDbModelDao
 import com.smorzhok.libraryapp.data.entities.BookDbModel
 import com.smorzhok.libraryapp.data.entities.BookDto
 import com.smorzhok.libraryapp.data.remote.LibraryApi

@@ -1,6 +1,7 @@
 package com.smorzhok.libraryapp.presentation.screens
 
-import androidx.compose.foundation.layout.padding
+import android.annotation.SuppressLint
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -10,17 +11,18 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.smorzhok.libraryapp.presentation.navigation.BottomNavigationBar
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
 
     Scaffold(
         bottomBar = { BottomNavigationBar(navController) }
-    ) { paddingValues ->
+    ) {
         NavHost(
             navController = navController,
             startDestination = MyScreen.Search.route,
-            modifier = Modifier.padding(paddingValues)
+            modifier = Modifier.fillMaxSize()
         ) {
             composable(MyScreen.Search.route) {
                 SearchScreen(navController)

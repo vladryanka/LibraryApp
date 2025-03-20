@@ -6,6 +6,8 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.smorzhok.libraryapp.data.database.AppDatabase.Companion.DATABASE_VERSION
+import com.smorzhok.libraryapp.data.database.contverter.MyConverter
+import com.smorzhok.libraryapp.data.database.dao.BookDbModelDao
 import com.smorzhok.libraryapp.data.entities.BookDbModel
 
 @Database(
