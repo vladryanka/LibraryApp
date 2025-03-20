@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
@@ -22,6 +21,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -48,7 +49,6 @@ fun BookListScreen(
     if (books.isNotEmpty()) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
-            contentPadding = PaddingValues(16.dp)
         ) {
             items(books) { book ->
                 BookCard(book = book, navController, mainViewModel)
@@ -74,11 +74,15 @@ fun BookCard(book: BookDbModel, navController: NavController, mainViewModel: Mai
     val paint = if (book.imageLinks?.thumbnail == null)
         painterResource(R.drawable.book_placeholder) else
         rememberAsyncImagePainter(book.imageLinks.thumbnail)
-     val ldId = MutableLiveData<Int>()
+    val ldId = MutableLiveData<Int>()
+
+    val isLiked = remember { mutableStateOf(false) }
 
     LaunchedEffect(book.title) {
         val getId = mainViewModel.selectBook(book.title)
-        ldId.value = getId
+        ldId.value = mainViewModel.selectedBook.value
+        val bookLiked = mainViewModel.isBookLiked(book.title)
+        isLiked.value = bookLiked
     }
 
     Box(
@@ -86,7 +90,7 @@ fun BookCard(book: BookDbModel, navController: NavController, mainViewModel: Mai
             .padding(8.dp)
             .fillMaxWidth()
             .clickable {
-                    navController.navigate("book_detail/${ldId.value}")
+                navController.navigate("book_detail/${ldId.value}")
             }
     ) {
         Column(horizontalAlignment = Alignment.Start) {
@@ -103,14 +107,20 @@ fun BookCard(book: BookDbModel, navController: NavController, mainViewModel: Mai
                         .clip(RoundedCornerShape(32.dp))
                 )
 
-
                 Box(
                     modifier = Modifier
                         .padding(8.dp)
                         .requiredSize(32.dp)
                         .clip(CircleShape)
                         .background(Color.White)
-                        .clickable { /* TODO: Логика для лайка */ },
+                        .clickable {
+                            if (isLiked.value) {
+                                mainViewModel.dislikeBook(book)
+                            } else {
+                                mainViewModel.likeBook(book)
+                            }
+                            isLiked.value = !isLiked.value
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Icon(

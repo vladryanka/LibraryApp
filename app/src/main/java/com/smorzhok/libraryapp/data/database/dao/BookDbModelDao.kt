@@ -1,18 +1,20 @@
 package com.smorzhok.libraryapp.data.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.smorzhok.libraryapp.data.entities.BookDbModel
 
 @Dao
 interface BookDbModelDao {
-    @Query("SELECT * FROM books")
-    fun getBooks(): LiveData<List<BookDbModel>>
 
-    @Query("SELECT EXISTS(SELECT 1 FROM books WHERE id = :id)")
-    suspend fun isBookExists(id: Int): Boolean
+    @Query("SELECT * FROM books")
+    suspend fun getFavoriteBooks(): List<BookDbModel>
+
+    @Query("SELECT EXISTS(SELECT 1 FROM books WHERE title = :title)")
+    suspend fun isBookExists(title: String): Boolean
 
     @Query("SELECT * FROM books WHERE id = :id")
     fun getBookById(id: Int): BookDbModel
@@ -20,6 +22,15 @@ interface BookDbModelDao {
     @Query("SELECT * FROM books WHERE title = :title")
     fun getIdByTitle(title: String):Int
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addBooks(book: BookDbModel)
+
+    @Query("DELETE FROM books WHERE title = :title")
+    suspend fun deleteBooksByTitle(title: String)
+
+    @Update
+    suspend fun updateBook(book: BookDbModel)
+
+    @Query("SELECT EXISTS(SELECT 1 FROM books WHERE id = :id)")
+    suspend fun containsBookById(id: Int): Boolean
 }
